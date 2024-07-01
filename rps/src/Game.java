@@ -18,19 +18,16 @@ public class Game {
         } else {
             System.out.println("The winner: " + player.getName() + " - " + player.getPoints() + " rounds won!\n");
         }
-        if (scanner.hasNextLine()) {
-            scanner.next();
-        }
+
         while (true) {
             System.out.println("Press \'n\' to play again or \'x\' to exit the game");
-            String playAgain = scanner.nextLine().toLowerCase();
+            String playAgain = scanner.next().toLowerCase();
             if (playAgain.equals("x")) {
                 System.exit(0);
             } else if (playAgain.equals("n")) {
                 break;
             }
         }
-
     }
 
     private void printResult(int playerChoice, int computerChoice) {
@@ -91,7 +88,7 @@ public class Game {
 
     public void getUserInfo() {
         System.out.print("Enter your name: ");
-        player = new Player(scanner.nextLine());
+        player = new Player(scanner.next());
         computer = new Computer();
         boolean validValue = false;
         while (!validValue) {
@@ -121,6 +118,7 @@ public class Game {
     public void run() {
         printInstruction();
         while (true) {
+            currentRound = 0;
             getUserInfo();
             battle();
             summaryInfo();
