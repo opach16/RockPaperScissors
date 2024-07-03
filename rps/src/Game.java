@@ -100,7 +100,6 @@ public class Game {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Enter a numerical value!");
-                ;
                 scanner.next();
             }
         }
