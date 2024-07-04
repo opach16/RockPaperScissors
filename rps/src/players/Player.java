@@ -29,7 +29,7 @@ public class Player {
                 scanner.next();
             }
         }
-        return choice;
+        return choice - 1;
     }
 
     public int getPoints() {

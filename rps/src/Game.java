@@ -6,9 +6,10 @@ import java.util.*;
 public class Game {
     private int numbersOfRounds;
     private int currentRound = 0;
+    private boolean cheatMode = false;
     private Player player;
     private Computer computer;
-    private List<String> figures = new ArrayList<>(List.of("Rock", "Paper", "Scissors"));
+    private List<String> figures;
     Scanner scanner = new Scanner(System.in);
 
     private void summaryInfo() {
@@ -30,55 +31,66 @@ public class Game {
         }
     }
 
-    private void printResult(int playerChoice, int computerChoice) {
-        System.out.println(player.getName() + ": " + figures.get(playerChoice - 1) + " || Computer: " + figures.get(computerChoice - 1));
+    private void printResult(String playerChoice, String computerChoice) {
+        System.out.println(player.getName() + ": " + playerChoice + " || Computer: " + computerChoice);
         System.out.println("Round: " + (currentRound) + " \nResult: " + player.getPoints() + " - " + computer.getPoints());
         System.out.println("--------------------");
     }
 
     public void battle() {
         while (player.getPoints() != numbersOfRounds && computer.getPoints() != numbersOfRounds) {
-            int playerChoice = player.getChoice();
-            int computerChoice = computer.getChoice();
+            String playerChoice = figures.get(player.getChoice());
+            String computerChoice;
+            if (cheatMode) {
+                if (playerChoice.equals("Rock")) {
+                    figures.add("Paper");
+                } else if (playerChoice.equals("Paper")) {
+                    figures.add("Scissors");
+                } else if (playerChoice.equals("Scissors")) {
+                    figures.add("Rock");
+                }
+                computerChoice = figures.get(computer.cheatChoice());
+            } else {
+                computerChoice = figures.get(computer.getChoice());
+            }
             switch (playerChoice) {
-                case 1:
-                    if (computerChoice == 2) {
+                case "Rock":
+                    if (computerChoice.equals(playerChoice)) {
+                        System.out.println("DRAW!");
+                    } else if (computerChoice.equals("Paper")) {
                         System.out.println("YOU LOST!");
                         computer.setPoints(computer.getPoints() + 1);
                         currentRound++;
-                    } else if (computerChoice == 3) {
+                    } else if (computerChoice.equals("Scissors")) {
                         System.out.println("YOU WON!");
                         player.setPoints(player.getPoints() + 1);
                         currentRound++;
-                    } else if (computerChoice == 1) {
-                        System.out.println("DRAW!");
                     }
                     break;
-                case 2:
-                    if (computerChoice == 1) {
-                        System.out.println("YOU WON!");
-                        player.setPoints(player.getPoints() + 1);
-                        currentRound++;
-                    } else if (computerChoice == 3) {
+                case "Paper":
+                    if (computerChoice.equals(playerChoice)) {
+                        System.out.println("DRAW!");
+                    } else if (computerChoice.equals("Scissors")) {
                         System.out.println("YOU LOST!");
                         computer.setPoints(computer.getPoints() + 1);
                         currentRound++;
-                    } else if (computerChoice == 2) {
-                        System.out.println("DRAW!");
+                    } else if (computerChoice.equals("Rock")) {
+                        System.out.println("YOU WON!");
+                        player.setPoints(player.getPoints() + 1);
+                        currentRound++;
                     }
-
                     break;
-                case 3:
-                    if (computerChoice == 1) {
+                case "Scissors":
+                    if (computerChoice.equals(playerChoice)) {
+                        System.out.println("DRAW!");
+                    } else if (computerChoice.equals("Rock")) {
                         System.out.println("YOU LOST!");
                         computer.setPoints(computer.getPoints() + 1);
                         currentRound++;
-                    } else if (computerChoice == 2) {
+                    } else if (computerChoice.equals("Paper")) {
                         System.out.println("YOU WON!");
                         player.setPoints(player.getPoints() + 1);
                         currentRound++;
-                    } else if (computerChoice == 3) {
-                        System.out.println("DRAW!");
                     }
                     break;
             }
@@ -86,10 +98,12 @@ public class Game {
         }
     }
 
-    public void getUserInfo() {
+    public void gameInitialization() {
         System.out.print("Enter your name: ");
         player = new Player(scanner.next());
         computer = new Computer();
+        figures = new ArrayList<>(List.of("Rock", "Paper", "Scissors"));
+
         boolean validValue = false;
         while (!validValue) {
             System.out.print("Enter the number of winning rounds to play (1-10): ");
@@ -102,6 +116,13 @@ public class Game {
                 System.out.println("Enter a numerical value!");
                 scanner.next();
             }
+        }
+
+        System.out.println("Press \'y\' to enable cheat mode or other key to skip");
+        String cheat = scanner.next().toLowerCase();
+        if (cheat.equals("y")) {
+            cheatMode = true;
+            System.out.println("Cheat mode activated!");
         }
     }
 
@@ -118,7 +139,7 @@ public class Game {
         printInstruction();
         while (true) {
             currentRound = 0;
-            getUserInfo();
+            gameInitialization();
             battle();
             summaryInfo();
         }

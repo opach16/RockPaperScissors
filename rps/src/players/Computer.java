@@ -7,7 +7,11 @@ public class Computer {
 
     public int getChoice() {
         Random random = new Random();
-        return random.nextInt(1, 4);
+        return random.nextInt(0, 3);
+    }
+    public int cheatChoice() {
+        Random random = new Random();
+        return random.nextInt(0, 4);
     }
 
     public Computer() {
