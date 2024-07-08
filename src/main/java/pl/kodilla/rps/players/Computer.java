@@ -11,7 +11,7 @@ public class Computer extends Player {
 
     @Override
     public int getChoice() {
-        return random.nextInt(1, 4);
+        return random.nextInt(1, 6);
     }
 }
 

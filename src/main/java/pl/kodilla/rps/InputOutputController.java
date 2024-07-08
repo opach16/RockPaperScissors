@@ -1,6 +1,7 @@
 package pl.kodilla.rps;
 
 import pl.kodilla.rps.players.Player;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 
 public class InputOutputController {
     private Scanner scanner = new Scanner(System.in);
-    private List<String> figures = new ArrayList<>(List.of("Rock", "Paper", "Scissors"));
+    private List<String> figures = new ArrayList<>(List.of("ROCK", "PAPER", "SCISSORS", "SPOCK", "LIZARD"));
 
     public InputOutputController() {
     }
@@ -38,12 +39,21 @@ public class InputOutputController {
     }
 
     public void printInstruction() {
-        System.out.println("Instruction:");
-        System.out.print("1 – play \"Rock\"; ");
-        System.out.print("2 – play \"Paper\"; ");
-        System.out.print("3 – play \"Scissors\"; ");
-        System.out.print("x – Exit game; ");
-        System.out.println("n – Restart\n");
+        System.out.println("INSTRUCTION:");
+        System.out.println("******************************");
+        System.out.println("ROCK beats SCISSORS and LIZARD");
+        System.out.println("PAPER beats ROCK and SPOCK");
+        System.out.println("SCISSORS beats PAPER and LIZARD");
+        System.out.println("SPOCK beats ROCK and SCISSORS");
+        System.out.println("LIZARD beats PAPER and SPOCK\n");
+        System.out.print("1 – play ROCK | ");
+        System.out.print("2 – play PAPER | ");
+        System.out.print("3 – play SCISSORS | ");
+        System.out.print("4 – play SPOCK | ");
+        System.out.print("5 – play LIZARD\n");
+        System.out.print("X – Exit game | ");
+        System.out.println("N – Restart");
+        System.out.println("******************************");
     }
 
     public void printResult(Player player1, Player player2, int player1Choice, int player2Choice, int result) {
@@ -54,30 +64,21 @@ public class InputOutputController {
         } else if (result == 2) {
             System.out.println("YOU LOST!");
         }
-        System.out.println(player1.getName() + ": " + figures.get(player1Choice - 1) + " || " + player2.getName() + ": " + figures.get(player2Choice - 1));
+        System.out.println(player1.getName() + ": " + figures.get(player1Choice - 1) + " || "
+                + player2.getName() + ": " + figures.get(player2Choice - 1));
         int round = Math.max(player1.getPoints(), player2.getPoints());
         System.out.println("Round: " + (round) + " \nResult: " + player1.getPoints() + " - " + player2.getPoints());
-        System.out.println("--------------------");
     }
 
     public void summaryInfo(Player player1, Player player2) {
+        System.out.println("******************************");
         System.out.print("GAME OVER! ");
         if (player1.getPoints() > player2.getPoints()) {
-            System.out.println("The winner: " + player1.getName() + " - " + player1.getPoints() + " rounds won!\n");
+            System.out.println("THE WINNER: " + player1.getName() + " - " + player1.getPoints() + " ROUNDS WON!");
         } else {
-            System.out.println("The winner: " + player2.getName() + " - " + player2.getPoints() + " rounds won!\n");
+            System.out.println("THE WINNER: " + player2.getName() + " - " + player2.getPoints() + " ROUNDS WON!");
         }
-    }
-
-    public boolean cheatMode() {
-        boolean cheatMode = false;
-        System.out.println("Press \'y\' to enable cheat mode or other key to skip");
-        String cheat = scanner.next().toLowerCase();
-        if (cheat.equals("y")) {
-            cheatMode = true;
-            System.out.println("Cheat mode activated!");
-        }
-        return cheatMode;
+        System.out.println("******************************");
     }
 
     public void playAgain() {

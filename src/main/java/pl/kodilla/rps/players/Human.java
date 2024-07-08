@@ -17,13 +17,13 @@ public class Human extends Player {
         boolean validChoice = false;
         while (!validChoice) {
             try {
-                System.out.println();
-                System.out.println("1 - Rock; 2 - Paper; 3 - Scissors;\nYour turn: ");
+                System.out.println("------------------------------");
+                System.out.print("1 - Rock; 2 - Paper; 3 - Scissors; 4 - Spock; 5 - Lizard\nYour turn: ");
                 choice = scanner.nextInt();
-                if (choice >= 1 && choice <= 3) {
+                if (choice >= 1 && choice <= 5) {
                     validChoice = true;
                 } else {
-                    System.out.println("Enter value 1 - 3");
+                    System.out.println("Enter value 1 - 5");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Enter numerical value!");
