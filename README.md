@@ -13,8 +13,8 @@ Lizard eats Paper and poisons Spock.
 
 How to Play:
 1. Enter your name.
-2. Decide the number of winning rounds required to end the game. 
-3. Choose Your Move.
+2. Decide the number of winning rounds required to end the game (1-10). 
+3. Choose Your Move (1-5).
    
 
 Number of winning rounds:
