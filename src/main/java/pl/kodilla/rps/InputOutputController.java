@@ -61,7 +61,7 @@ public class InputOutputController {
             System.out.println("DRAW!");
         } else if (result == 1) {
             System.out.println("YOU WIN!");
-        } else if (result == 2) {
+        } else if (result == -1) {
             System.out.println("YOU LOST!");
         }
         System.out.println(player1.getName() + ": " + figures.get(player1Choice - 1) + " || "
