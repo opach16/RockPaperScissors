@@ -1,13 +1,16 @@
-package players;
+package pl.kodilla.rps.players;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Player {
-    private String name;
-    private int points;
+public class Human extends Player {
 
+    public Human(String name) {
+        super(name);
+    }
+
+    @Override
     public int getChoice() {
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
@@ -29,22 +32,6 @@ public class Player {
                 scanner.next();
             }
         }
-        return choice - 1;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Player(String name) {
-        this.name = name;
+        return choice;
     }
 }
