@@ -14,5 +14,3 @@ public class Computer extends Player {
         return random.nextInt(1, 6);
     }
 }
-
-

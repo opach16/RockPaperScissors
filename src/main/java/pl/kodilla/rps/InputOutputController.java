@@ -2,21 +2,15 @@ package pl.kodilla.rps;
 
 import pl.kodilla.rps.players.Player;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class InputOutputController {
-    private Scanner scanner = new Scanner(System.in);
-    private List<String> figures = new ArrayList<>(List.of("ROCK", "PAPER", "SCISSORS", "SPOCK", "LIZARD"));
-
-    public InputOutputController() {
-    }
+    private final static Scanner SCANNER = new Scanner(System.in);
+    private final static List<String> FIGURES = new ArrayList<>(List.of("ROCK", "PAPER", "SCISSORS", "SPOCK", "LIZARD"));
 
     public String getPlayerName() {
         System.out.print("Enter your name: ");
-        String playerName = scanner.next();
+        String playerName = SCANNER.next();
         return playerName;
     }
 
@@ -26,13 +20,13 @@ public class InputOutputController {
         while (!validValue) {
             System.out.print("Enter the number of winning rounds to play (1-10): ");
             try {
-                numberOfRounds = scanner.nextInt();
+                numberOfRounds = SCANNER.nextInt();
                 if (numberOfRounds >= 1 && numberOfRounds <= 10) {
                     validValue = true;
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Enter a numerical value!");
-                scanner.next();
+                SCANNER.next();
             }
         }
         return numberOfRounds;
@@ -64,8 +58,8 @@ public class InputOutputController {
         } else if (result == -1) {
             System.out.println("YOU LOST!");
         }
-        System.out.println(player1.getName() + ": " + figures.get(player1Choice - 1) + " || "
-                + player2.getName() + ": " + figures.get(player2Choice - 1));
+        System.out.println(player1.getName() + ": " + FIGURES.get(player1Choice - 1) + " || "
+                + player2.getName() + ": " + FIGURES.get(player2Choice - 1));
         int round = Math.max(player1.getPoints(), player2.getPoints());
         System.out.println("Round: " + (round) + " \nResult: " + player1.getPoints() + " - " + player2.getPoints());
     }
@@ -84,12 +78,35 @@ public class InputOutputController {
     public void playAgain() {
         while (true) {
             System.out.println("Press \'n\' to play again or \'x\' to exit the game");
-            String playAgain = scanner.next().toLowerCase();
+            String playAgain = SCANNER.next().toLowerCase();
             if (playAgain.equals("x")) {
                 System.exit(0);
             } else if (playAgain.equals("n")) {
                 break;
             }
         }
+    }
+
+    public static int getHumanMove() {
+        int choice = -1;
+        boolean validChoice = false;
+        while (!validChoice) {
+            try {
+                System.out.println("------------------------------");
+                System.out.print("1 - Rock; 2 - Paper; 3 - Scissors; 4 - Spock; 5 - Lizard\nYour turn: ");
+                choice = SCANNER.nextInt();
+                if (choice >= 1 && choice <= 5) {
+                    validChoice = true;
+                } else {
+                    System.out.println("Enter value 1 - 5");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Enter numerical value!");
+                SCANNER.next();
+            } catch (NoSuchElementException e) {
+                SCANNER.next();
+            }
+        }
+        return choice;
     }
 }

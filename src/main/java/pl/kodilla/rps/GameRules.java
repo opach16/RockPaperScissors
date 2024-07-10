@@ -9,9 +9,6 @@ public class GameRules {
             {-1, 1, -1, 1, 0}
     };
 
-    public GameRules() {
-    }
-
     public int getResult(int player1Move, int player2Move) {
         return rules[player1Move - 1][player2Move - 1];
     }

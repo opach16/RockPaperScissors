@@ -10,9 +10,6 @@ public class Game {
     private GameRules gameRules;
     private InputOutputController ioController;
 
-    public Game() {
-    }
-
     public void gameInit() {
         ioController = new InputOutputController();
         ioController.printInstruction();

@@ -3,10 +3,10 @@ package pl.kodilla.rps;
 import pl.kodilla.rps.players.Player;
 
 public class GameService {
-    private Player player1;
-    private Player player2;
-    private GameRules gameRules;
-    private int maxPoints;
+    private final Player player1;
+    private final Player player2;
+    private final GameRules gameRules;
+    private final int maxPoints;
     private final InputOutputController inputOutputController = new InputOutputController();
 
     public GameService(Player player1, Player player2, GameRules gameRules, int maxPoints) {
